@@ -73,9 +73,14 @@ workflows:
           filters:
             tags:
               only: /^[0-9]+.*/
-
-  nightly-snapshot:
-    when: << pipeline.parameters.run-schedule >>
+nightly-snapshot:
+    triggers: #use the triggers key to indicate a scheduled build
+      - schedule:
+          cron: "0 0 * * *" # use cron syntax to set the schedule
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - android/run-ui-tests:
           name: build-and-test
