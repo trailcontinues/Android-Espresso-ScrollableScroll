@@ -7,7 +7,7 @@ const org = process.env.ORG_NAME
 const project = process.env.PROJECT_ID
 const token = process.env.CIRCLECI_TOKEN
 
-const postScheduleEndpoint = `${API_BASE_URL}/${vcs}/${org}/${project}/schedule`
+const postScheduleEndpoint = https://circleci.com/api/v2/project/github/trailcontinues/android-espresso-scrollablescroll/schedule
 
 async function setupNightlySchedule(){
 
