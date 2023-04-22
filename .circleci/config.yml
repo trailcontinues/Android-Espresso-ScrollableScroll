@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   android: circleci/android@1.0.3
+   slack: circleci/slack@4.1
 
 jobs:
   build-library:
@@ -90,3 +91,28 @@ nightly-snapshot:
           name: Deploy Snapshot to Sonatype
           requires:
             - build-and-test
+             steps:
+      - slack/notify:
+          channel: ABCXYZ, ZXCVBN
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
+workflows:
+  deploy_and_notify:
+    jobs:
+      - deploy:
+          context: slack-secrets
+
